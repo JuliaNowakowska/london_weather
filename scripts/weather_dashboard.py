@@ -1,11 +1,23 @@
 import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
+import plotly.express as px
+import pandas as pd
 
 
-def create_dashboard(max_temp_date, max_temp, min_temp_date, min_temp):
+def create_dashboard(max_temp_date, max_temp, min_temp_date, min_temp, temperature_data):
     # Initialize the Dash app
     app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+
+    # Create the line plot using Plotly
+    fig = px.line(
+        temperature_data,
+        x="Date",
+        y="Avg_temperature",
+        title="Temperature Over Time",
+        labels={"Date": "Date", "Temperature": "Temperature (°C)"},
+        template="plotly_white",
+    )
 
     # Define the layout
     app.layout = dbc.Container(
@@ -48,10 +60,18 @@ def create_dashboard(max_temp_date, max_temp, min_temp_date, min_temp):
                 justify="center",
                 className="mt-5",
             ),
+            dbc.Row(
+                [
+                    # Line Plot
+                    dbc.Col(
+                        dcc.Graph(figure=fig),
+                        width=12,
+                    ),
+                ],
+                className="mt-4",
+            ),
         ],
         fluid=True,
     )
 
     return app
-
-

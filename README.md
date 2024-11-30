@@ -13,3 +13,13 @@ This dataset contains daily weather measurements including cloud cover, sunshine
 | 2006-06-03 | 0                   | 14.4             | 333                      | 24.2          | 17             | 9.9           | 0                  | 102950        | 0               |
 | 2006-06-04 | 4                   | 8.4              | 255                      | 23.6          | 17.6           | 11.5          | 0.4                | 102650        | 0               |
 | 2006-06-05 | 4                   | 10.5             | 284                      | 20.1          | 16.5           | 12.9          | 0                  | 102560        | 0               |
+
+
+### Data Cleanup
+
+Data cleanup can be performed using scripts in sql/data_cleanup folder. It **includes altering data types, handling missing values and identifying outliers**. 
+
+- 01_alter_type.sql - changes the date type to timestamp without time zone.
+- 02_missing_values.sql - updates the missing values in the original 'readings' table with the monthly averages.
+- 03_monthly_averages.sql & 04_monthly_standard_deviations.sql - calculate monthly averages and standard deviations for each variable, values used in other scripts.
+- 04_identifying_outliers.sql - Flags mean_temp values as outliers if their z-scores are greater than 3

@@ -26,4 +26,4 @@ Data cleanup can be performed using scripts in sql/data_cleanup folder. It **inc
 
 ## Data Analysis
 
-In this step, using scripts from sql/data_analysis I conducted a simple data analysis. The scripts return min and max temperature observed in London during the whole time period covered by the dataset. Additionally, script 03_get_monthly_avg returns monthly average temperatures, which is later used in visualizations.
+In this step, using scripts from sql/data_analysis I conducted a simple data analysis. The scripts return min and max temperature observed in London during the whole time period covered by the dataset. Additionally, script get_monthly_avg.sql returns monthly average temperatures, which is later used in visualizations.

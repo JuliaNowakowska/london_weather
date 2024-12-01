@@ -23,3 +23,7 @@ Data cleanup can be performed using scripts in sql/data_cleanup folder. It **inc
 - 02_missing_values.sql - updates the missing values in the original 'readings' table with the monthly averages.
 - 03_monthly_averages.sql & 04_monthly_standard_deviations.sql - calculate monthly averages and standard deviations for each variable, values used in other scripts.
 - 04_identifying_outliers.sql - Flags mean_temp values as outliers if their z-scores are greater than 3
+
+## Data Analysis
+
+In this step, using scripts from sql/data_analysis I conducted a simple data analysis. The scripts return min and max temperature observed in London during the whole time period covered by the dataset. Additionally, script 03_get_monthly_avg returns monthly average temperatures, which is later used in visualizations.

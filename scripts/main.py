@@ -1,18 +1,11 @@
+from config import PG_CONFIG
 from database_handler import Database
 from weather_dashboard import create_dashboard
 from monthly_dataframe import convert_to_dataframe
 
 if __name__ == "__main__":
-    pg_config = {
-        'host': 'localhost',
-        'port': 5432,
-        'database': 'london_weather',
-        'user': '',
-        'password': ''
-    }
-
     # Establishing a connection with the database
-    db = Database(pg_config)
+    db = Database(PG_CONFIG)
 
     # Placeholder for the results
     results = []

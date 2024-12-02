@@ -21,20 +21,7 @@ class Database:
         except psycopg2.DatabaseError as db_error:
             print(f"Database connection error: {db_error}")
             return None
-
-
-    def query(self, sql_query):
-        """
-        Returns the result of the query from the database.
-        """
-        try:
-            with self.connection.cursor() as cursor:
-                cursor.execute(sql_query)
-                return cursor.fetchall()
-        except psycopg2.Error as query_error:
-            print(f"Query execution error: {query_error}")
-            return None
-
+    
     def read_sql(self, sql_file_path):
         """
         Reads SQL script.
@@ -44,6 +31,19 @@ class Database:
                 return file.read()
         except FileNotFoundError as fnf_error:
             print(f"SQL file not found: {fnf_error}")
+            return None
+
+    def query(self, sql_file_path):
+        """
+        Returns the result of the query from the database.
+        """
+        sql_query = self.read_sql(sql_file_path)
+        try:
+            with self.connection.cursor() as cursor:
+                cursor.execute(sql_query)
+                return cursor.fetchall()
+        except psycopg2.Error as query_error:
+            print(f"Query execution error: {query_error}")
             return None
 
     def close(self):

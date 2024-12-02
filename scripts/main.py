@@ -1,4 +1,4 @@
-from data_pipeline import db_connection, db_query, read_sql
+from data_pipeline import Database
 from weather_dashboard import create_dashboard
 from monthly_dataframe import convert_to_dataframe
 
@@ -12,22 +12,22 @@ if __name__ == "__main__":
     }
 
     # Establishing a connection with the database
-    connection = db_connection(pg_config)
+    db = Database(pg_config)
 
     # Placeholder for the results
     results = []
 
-    if connection:
+    if db.connection:
         try:
             sql_scripts = ['/sql/07_max_temp.sql',
                            '/sql/06_min_temp.sql',
                            '/sql/08_get_monthly_avg.sql']
 
             for sql_script in sql_scripts:
-                sql_query = read_sql(sql_script)
-                results.append(db_query(connection, sql_query))
+                sql_query = db.read_sql(sql_script)
+                results.append(db.query(sql_query))
         finally:
-            connection.close()
+            db.connection.close()
 
     # Max temp
     max_temp_date = results[0][0][0]

@@ -30,3 +30,14 @@ def db_query(connection, sql_query):
     except psycopg2.Error as query_error:
         print(f"Query execution error: {query_error}")
         return None
+
+def read_sql(sql_file_path):
+    """
+    Reads SQL script.
+    """
+    try:
+        with open(sql_file_path, 'r') as file:
+            return file.read()
+    except FileNotFoundError as fnf_error:
+        print(f"SQL file not found: {fnf_error}")
+        return None

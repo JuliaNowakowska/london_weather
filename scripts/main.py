@@ -1,4 +1,4 @@
-from data_pipeline import Database
+from database_handler import Database
 from weather_dashboard import create_dashboard
 from monthly_dataframe import convert_to_dataframe
 

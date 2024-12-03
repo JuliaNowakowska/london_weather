@@ -1,8 +1,8 @@
 import os
 from config import PG_CONFIG
+from utils import monthly_dataframe
 from data_pipeline import Database
 from weather_dashboard import create_dashboard
-from monthly_dataframe import convert_to_dataframe
 
 if __name__ == "__main__":
     # Establishing a connection with the database
@@ -19,7 +19,7 @@ if __name__ == "__main__":
         try:
             max_temp_date, max_temp = db.query(max_temp_sql)[0][0], db.query(max_temp_sql)[0][1]
             min_temp_date, min_temp = db.query(min_temp_sql)[0][0], db.query(min_temp_sql)[0][1]
-            monthly_avg_temp = convert_to_dataframe(db.query(monthly_avg_sql))
+            monthly_avg_temp = monthly_dataframe(db.query(monthly_avg_sql))
         finally:
             db.connection.close()
 

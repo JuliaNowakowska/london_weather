@@ -2,7 +2,7 @@ import os
 from config import PG_CONFIG
 from utils import monthly_dataframe
 from data_pipeline import Database
-from weather_dashboard import create_dashboard
+from dashboard import create_dashboard
 
 if __name__ == "__main__":
     # Establishing a connection with the database

@@ -2,76 +2,63 @@ import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 import plotly.express as px
-import pandas as pd
 
 
-def create_dashboard(max_temp_date, max_temp, min_temp_date, min_temp, temperature_data):
-    # Initialize the Dash app
-    app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+def create_temperature_card(title, temperature, date):
+    return dbc.Card(
+        [
+            dbc.CardHeader(title),
+            dbc.CardBody(
+                [
+                    html.H3(f"{temperature}°C", className="card-title text-primary"),
+                    html.P(f"Date: {date}", className="card-text"),
+                ]
+            ),
+        ],
+        className="shadow-sm",
+    )
 
-    # Create the line plot using Plotly
-    fig = px.line(
-        temperature_data,
+def create_temperature_plot(data):
+    return px.line(
+        data,
         x="Date",
-        y="Avg_temperature",
+        y="Value",
         title="Temperature Over Time",
-        labels={"Date": "Date", "Temperature": "Temperature (°C)"},
+        labels={"Date": "Date", "Value": "Temperature (°C)"},
         template="plotly_white",
     )
 
-    # Define the layout
-    app.layout = dbc.Container(
+def create_dashboard_layout(max_temp_date, max_temp, min_temp_date, min_temp, temperature_data):
+    # Generating the figure with temp plot
+    fig = create_temperature_plot(temperature_data)
+
+    # Defining the layout
+    layout = dbc.Container(
         [
             dbc.Row(
                 [
-                    # Card for Max Temperature
-                    dbc.Col(
-                        dbc.Card(
-                            [
-                                dbc.CardHeader("Max Temperature"),
-                                dbc.CardBody(
-                                    [
-                                        html.H3(f"{max_temp}°C", className="card-title text-primary"),
-                                        html.P(f"Date: {max_temp_date}", className="card-text"),
-                                    ]
-                                ),
-                            ],
-                            className="shadow-sm",
-                        ),
-                        width=4,
-                    ),
-                    # Card for Min Temperature
-                    dbc.Col(
-                        dbc.Card(
-                            [
-                                dbc.CardHeader("Min Temperature"),
-                                dbc.CardBody(
-                                    [
-                                        html.H3(f"{min_temp}°C", className="card-title text-primary"),
-                                        html.P(f"Date: {min_temp_date}", className="card-text"),
-                                    ]
-                                ),
-                            ],
-                            className="shadow-sm",
-                        ),
-                        width=4,
-                    ),
+                    # Min Temperature Card
+                    dbc.Col(create_temperature_card("Min Temperature", min_temp, min_temp_date), width=4),
+                    # Max Temperature Card
+                    dbc.Col(create_temperature_card("Max Temperature", max_temp, max_temp_date), width=4),
                 ],
                 justify="center",
                 className="mt-5",
             ),
             dbc.Row(
                 [
-                    # Line Plot
-                    dbc.Col(
-                        dcc.Graph(figure=fig),
-                        width=12,
-                    ),
+                    # Line Plot with monthly average temperature
+                    dbc.Col(dcc.Graph(figure=fig), width=12),
                 ],
                 className="mt-4",
             ),
         ],
         fluid=True,
     )
+    return layout
 
+# Main function
+def create_dashboard(max_temp_date, max_temp, min_temp_date, min_temp, temperature_data):
+    app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+    app.layout = create_dashboard_layout(max_temp_date, max_temp, min_temp_date, min_temp, temperature_data)
     return app

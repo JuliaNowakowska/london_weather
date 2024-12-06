@@ -1,4 +1,4 @@
-## Introduction
+## Dataset
 
 **london_weather** dataset is a collaction of data ranging from 1979-01-01 until 2020-12-31, which contains information about climate in London. Using scripts in sql/data_exploration folder it is possible to examine the corpus. 
 
@@ -30,8 +30,11 @@ In this step, using scripts from sql/data_analysis I conducted a simple data ana
 
 ## Database handler
 
-In order to extract the data and use it later on in the dashboard, I designed a Database handler class, which covers connections and queries. 
-
+In order to extract the data and use it later on in the dashboard, I designed a Database handler class, which covers connections and queries. It includes:
+- connect method, which establishes a connection with the database,
+- read_sql() - reads and returns the contents of an SQL file,
+- query() - executes an SQL query from a provided file and returns the result,
+- close method, which closes the database connection.
 
 ## Dashboard
 

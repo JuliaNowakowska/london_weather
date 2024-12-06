@@ -24,10 +24,6 @@ Data cleanup can be performed using scripts in sql/data_cleanup folder. It **inc
 - 03_monthly_averages.sql & 04_monthly_standard_deviations.sql - calculate monthly averages and standard deviations for each variable, values used in other scripts.
 - 04_identifying_outliers.sql - Flags mean_temp values as outliers if their z-scores are greater than 3
 
-## Data Analysis
-
-In this step, using scripts from sql/data_analysis I conducted a simple data analysis. The scripts return min and max temperature observed in London during the whole time period covered by the dataset. Additionally, script get_monthly_avg.sql returns monthly average temperatures, which is later used in visualizations.
-
 ## Database handler
 
 In order to extract the data and use it later on in the dashboard, I designed a Database handler class, which covers connections and queries. It includes:
@@ -36,7 +32,15 @@ In order to extract the data and use it later on in the dashboard, I designed a 
 - query() - executes an SQL query from a provided file and returns the result,
 - close method, which closes the database connection.
 
+## Data Analysis
+
+Using scripts from sql/data_analysis, it is possible to do a simple data exploration analysis. The scripts return min and max temperature observed in London during the whole time period covered by the dataset. Additionally, script get_monthly_avg.sql returns monthly average temperatures, which is later used in visualizations.
+
 ## Dashboard
+The final step of the project was to create a dashboard to visualize the outcomes of the data analysis. The WeatherDashboard class, defined in dashboard.py, uses the Dash library to create the charts as shown below.
+
+
+
 
 ![Screenshot 2024-12-06 at 20 13 37](https://github.com/user-attachments/assets/0af63ef6-5577-4812-bffc-4c55b06bcd58)
 

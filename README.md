@@ -31,3 +31,12 @@ In this step, using scripts from sql/data_analysis I conducted a simple data ana
 ## Database handler
 
 In order to extract the data and use it later on in the dashboard, I designed a Database handler class, which covers connections and queries. 
+
+
+## Dashboard
+
+![Screenshot 2024-12-06 at 20 13 37](https://github.com/user-attachments/assets/0af63ef6-5577-4812-bffc-4c55b06bcd58)
+
+
+
+

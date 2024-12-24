@@ -58,13 +58,25 @@ class WeatherDashboard:
 
         return dbc.Container(
             [
+                # Predicted Temperature
                 dbc.Row(
-                    [   dbc.Col(self.temperature_card("Min Temperature", self.min_temp, self.min_temp_date), width=4),
+                    [
+                        dbc.Col(self.predicted_temp_card(), width=12),
+                    ],
+                    className="mt-3",
+                ),
+
+                # Min and Max Temperature Cards
+                dbc.Row(
+                    [
+                        dbc.Col(self.temperature_card("Min Temperature", self.min_temp, self.min_temp_date), width=4),
                         dbc.Col(self.temperature_card("Max Temperature", self.max_temp, self.max_temp_date), width=4),
                     ],
                     justify="center",
                     className="mt-5",
                 ),
+
+                # Line Plot
                 dbc.Row(
                     [
                         dbc.Col(dcc.Graph(figure=fig), width=10),
@@ -74,6 +86,7 @@ class WeatherDashboard:
                 ),
             ],
             fluid=True,
+            style={"padding": "20px"},
         )
 
     def run(self, debug=True):
